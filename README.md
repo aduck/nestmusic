@@ -24,5 +24,6 @@
   music.getHotList() // 获取热门排行榜歌曲，无参数
   music.getUserPlayList(uid) // 获取指定用户的歌单，参数（用户id）
   music.getHotPlayList() // 获取热门歌单，无参数
+  music.getSongDetail(id) // 获取歌曲详情，参数(歌曲id)
   ```
 

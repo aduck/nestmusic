@@ -11,7 +11,8 @@ const URI = {
   comment: 'http://music.163.com/weapi/v1/resource/comments/R_SO_4_',
   hotlist: 'http://music.163.com/discover/toplist?id=3778678',
   userplaylist: 'http://music.163.com/weapi/user/playlist',
-  hotplaylist: 'http://music.163.com/discover/playlist'
+  hotplaylist: 'http://music.163.com/discover/playlist',
+  songdetail: 'http://music.163.com/weapi/v3/song/detail'
 }
 
 /*
@@ -115,7 +116,11 @@ const getComments = rid => {
 const getPlayList = id => {
   const data = encrypt({
     csrf_token: '',
-    id: id
+    id: id,
+    offset: 0,
+    total: true,
+    limit: 1000,
+    n: 1000,
   })
   return new Promise((resolve, reject) => {
     request
@@ -234,6 +239,36 @@ const getHotPlayList = () => {
   })
 }
 
+/*
+    获取歌曲详情
+*/
+const getSongDetail = id => {
+  const data = encrypt({
+    csrf_token: '',
+    ids: '[' + id + ']',
+    c: JSON.stringify([{id}])
+  })
+  return new Promise((resolve, reject) => {
+    request
+      .post(URI.songdetail)
+      .send({
+        params: data.params,
+        encSecKey: data.encSecKey
+      })
+      .type('form')
+      .set({
+        'Referer': 'http://music.163.com/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+      })
+      .end((err, res) => {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(res.text)
+      })
+  })
+}
 
 module.exports = {
   login,
@@ -242,5 +277,6 @@ module.exports = {
   getComments,
   getHotList,
   getUserPlayList,
-  getHotPlayList
+  getHotPlayList,
+  getSongDetail
 }
