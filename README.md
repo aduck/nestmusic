@@ -22,5 +22,7 @@
   music.getPlayList(listid) // 获取歌单所有歌曲，参数(歌单id)
   music.getComments(songid) // 获取歌曲评论，参数(歌曲id)
   music.getHotList() // 获取热门排行榜歌曲，无参数
+  music.getUserPlayList(uid) // 获取指定用户的歌单，参数（用户id）
+  music.getHotPlayList() // 获取热门歌单，无参数
   ```
 

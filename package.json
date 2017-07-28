@@ -1,7 +1,8 @@
 {
   "name": "nestmusic",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "网易云音乐api",
+  "keywords":["网易云","音乐"],
   "main": "index.js",
   "scripts": {
     
